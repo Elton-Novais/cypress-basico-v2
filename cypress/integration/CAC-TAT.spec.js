@@ -10,11 +10,11 @@ describe('Central de Atendimento ao Cliente TAT', function() {
     beforeEach(function() {
         cy.visit('./src/index.html')
     })
-    it('verifica o titulo da aplicação', function() {
+     it.only('verifica o titulo da aplicação', function() {
         
         cy.title().should('be.equal', 'Central de Atendimento ao Cliente TAT')   
     })
-    it('preenche os campos obrigatórios e envia o formulário', function() {
+     it.only('preenche os campos obrigatórios e envia o formulário', function() {
         const longtext = 'TESTE teste teste teste teste teste teste testeTESTE teste teste teste teste teste teste testeTESTE teste teste teste teste teste teste testeTESTE teste teste teste teste teste teste teste'
         cy.get('#firstName').type('Elton')
         cy.get('#lastName').type('Novais')
@@ -26,7 +26,7 @@ describe('Central de Atendimento ao Cliente TAT', function() {
         cy.get('.success > strong').should('be.visible')
         
     })
-    it('exibe mensagem de erro ao submeter o formulário com um email com formatação inválida', function() {
+     it.only('exibe mensagem de erro ao submeter o formulário com um email com formatação inválida', function() {
         const longtext = 'TESTE teste teste teste teste teste teste testeTESTE teste teste teste teste teste teste testeTESTE teste teste teste teste teste teste testeTESTE teste teste teste teste teste teste teste'
         cy.get('#firstName').type('Elton')
         cy.get('#lastName').type('Novais')
@@ -36,7 +36,7 @@ describe('Central de Atendimento ao Cliente TAT', function() {
         cy.get('button[type="submit"]').click()
         cy.get('.error > strong').should('be.visible')
     })
-    it('exibe mensagem de erro quando o telefone se torna obrigatório mas não é preenchido antes do envio do formulário', function() {
+     it.only('exibe mensagem de erro quando o telefone se torna obrigatório mas não é preenchido antes do envio do formulário', function() {
         const longtext = 'TESTE teste teste teste teste teste teste testeTESTE teste teste teste teste teste teste testeTESTE teste teste teste teste teste teste testeTESTE teste teste teste teste teste teste teste'
         cy.get('#firstName').type('Elton')
         cy.get('#lastName').type('Novais')
@@ -47,7 +47,7 @@ describe('Central de Atendimento ao Cliente TAT', function() {
         cy.get('button[type="submit"]').click()
         cy.get('.error > strong').should('be.visible')
     })
-    it('preenche e limpa os campos nome, sobrenome, email e telefone', function() {
+     it.only('preenche e limpa os campos nome, sobrenome, email e telefone', function() {
         cy.get('#firstName')
         .type('Elton')
         .should('have.value', 'Elton')
@@ -73,48 +73,48 @@ describe('Central de Atendimento ao Cliente TAT', function() {
         .clear()
         .should('have.value', '')
     })
-    it('exibe mensagem de erro ao submeter o formulário sem preencher os campos obrigatórios', function() {
+     it.only('exibe mensagem de erro ao submeter o formulário sem preencher os campos obrigatórios', function() {
         cy.get('button[type="submit"]').click()
         cy.get('.error > strong').should('be.visible')
     })
 
-    it('envia o formulário com sucesso usando um comando customizado', function() {
+     it.only('envia o formulário com sucesso usando um comando customizado', function() {
         cy.fillMandatoryFieldsAndSubmit()
 
         cy.get('.success > strong').should('be.visible')
     })
     
-    it('seleciona um produto (YouTube) por seu texto', function() {
+     it.only('seleciona um produto (YouTube) por seu texto', function() {
         cy.get('select').select('YouTube').should('have.value', 'youtube')
     }) 
 
-    it("seleciona um produto (Mentoria) por seu valor (value)", function() {
+     it.only("seleciona um produto (Mentoria) por seu valor (value)", function() {
         cy.get('select').select('mentoria').should('have.value', 'mentoria')
     })
 
-    it("seleciona um produto (Blog) por seu índice", function() {
+     it.only("seleciona um produto (Blog) por seu índice", function() {
         cy.get('select').select(1).should('have.value', 'blog')
     })
 
-    it('marca o tipo de atendimento "Feedback"', function() {
+     it.only('marca o tipo de atendimento "Feedback"', function() {
         cy.get('input[value="feedback"]').check().should('be.checked')
     })
 
-    it('marca cada tipo de atendimento', function() {
+     it.only('marca cada tipo de atendimento', function() {
         cy.get('input[type="radio"]').should('have.length', 3).each(function($radio) {
             cy.wrap($radio).check() 
             cy.wrap($radio).should('be.checked')
         })
     })
 
-    it('marca ambos checkboxes, depois desmarca o último', function() {
+     it.only('marca ambos checkboxes, depois desmarca o último', function() {
        cy.get('input[type="checkbox"]').check()
        .should('be.checked')
        .last().uncheck()
        .should('not.be.checked')
     })
 
-    it("seleciona um arquivo da pasta fixtures", function() {
+    it.only("seleciona um arquivo da pasta fixtures", function() {
        cy.get('input[type="file"]')
        .should('not.have.value')
        .selectFile('cypress/fixtures/example.json') 
@@ -123,7 +123,7 @@ describe('Central de Atendimento ao Cliente TAT', function() {
        })
     })
 
-    it("seleciona um arquivo simulando um drag-and-drop", function() {
+     it.only("seleciona um arquivo simulando um drag-and-drop", function() {
        cy.get('input[type="file"]')
        .should('not.have.value')
        .selectFile('cypress/fixtures/example.json', {action: 'drag-drop'})
@@ -132,7 +132,7 @@ describe('Central de Atendimento ao Cliente TAT', function() {
        })
     })
 
-    it("seleciona um arquivo utilizando uma fixture para a qual foi dada um alias", function() {
+     it.only("seleciona um arquivo utilizando uma fixture para a qual foi dada um alias", function() {
        cy.fixture('example.json').as('meuArquivo')
        cy.get('input[type="file"]')
        .selectFile('@meuArquivo')
